@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Risk Assessment Tool</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shield-alt me-2"></i>
+                Cyber Risk Assessment 1
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#assessment">Assessment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#results">Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reports">Reports</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" id="toast-container">
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        
+        <!-- Assessment Form -->
+        <section id="assessment" class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">
+                    <i class="fas fa-clipboard-list me-2"></i>
+                    Cybersecurity Risk Assessment
+                </h2>
+            </div>
+            <div class="card-body">
+                <form id="risk-assessment-form">
+                    <!-- Organization Information -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Organization Name</label>
+                            <input type="text" class="form-control" id="org-name" name="org-name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Industry Sector</label>
+                            <select class="form-select" id="industry-sector" name="industry-sector" required>
+                                <option value="">Loading industries...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Authentication & Access Control -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-user-shield me-2"></i>
+                                Authentication & Access Control
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Multi-Factor Authentication</label>
+                                    <select class="form-select" id="mfa" name="mfa" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Enterprise MFA (Hardware tokens, biometrics)</option>
+                                        <option value="3">Standard MFA (Mobile apps, SMS)</option>
+                                        <option value="2">Basic MFA (Email verification)</option>
+                                        <option value="1">No MFA</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Password Policy</label>
+                                    <select class="form-select" id="password-policy" name="password-policy" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Strong (16+ chars, complexity rules)</option>
+                                        <option value="3">Good (12+ chars, mixed case)</option>
+                                        <option value="2">Basic (8+ chars)</option>
+                                        <option value="1">Weak (No complexity)</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Network Security -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">
+                                <i class="fas fa-network-wired me-2"></i>
+                                Network Security
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Firewall Implementation</label>
+                                    <select class="form-select" id="firewall" name="firewall" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Next-Generation Firewall</option>
+                                        <option value="3">Traditional Firewall</option>
+                                        <option value="2">Basic Firewall</option>
+                                        <option value="1">No Firewall</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Network Segmentation</label>
+                                    <select class="form-select" id="segmentation" name="segmentation" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Micro-segmentation</option>
+                                        <option value="3">VLAN Segmentation</option>
+                                        <option value="2">Basic Segmentation</option>
+                                        <option value="1">No Segmentation</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Endpoint Security -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-danger text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-laptop me-2"></i>
+                                Endpoint Security
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Endpoint Protection</label>
+                                    <select class="form-select" id="endpoint-protection" name="endpoint-protection" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Advanced EDR</option>
+                                        <option value="3">Standard EDR</option>
+                                        <option value="2">Basic Antivirus</option>
+                                        <option value="1">No Protection</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Device Encryption</label>
+                                    <select class="form-select" id="encryption" name="encryption" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Full Disk Encryption</option>
+                                        <option value="3">File-Level Encryption</option>
+                                        <option value="2">Partial Encryption</option>
+                                        <option value="1">No Encryption</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Protection -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-database me-2"></i>
+                                Data Protection
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Data Backup Strategy</label>
+                                    <select class="form-select" id="backup" name="backup" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">3-2-1 Strategy</option>
+                                        <option value="3">Hybrid Backup</option>
+                                        <option value="2">Basic Backup</option>
+                                        <option value="1">No Backup</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Data Classification</label>
+                                    <select class="form-select" id="classification" name="classification" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Automated Classification</option>
+                                        <option value="3">Manual Classification</option>
+                                        <option value="2">Basic Classification</option>
+                                        <option value="1">No Classification</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Incident Response -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Incident Response
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Security Monitoring</label>
+                                    <select class="form-select" id="monitoring" name="monitoring" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">24/7 SOC</option>
+                                        <option value="3">Business Hours</option>
+                                        <option value="2">Outsourced</option>
+                                        <option value="1">No Monitoring</option> -->
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Security Training</label>
+                                    <select class="form-select" id="training" name="training" required>
+                                        <!-- <option value="">Select Option</option>
+                                        <option value="4">Continuous Training</option>
+                                        <option value="3">Quarterly Training</option>
+                                        <option value="2">Annual Training</option>
+                                        <option value="1">No Training</option> -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-calculator me-2"></i>
+                            Calculate Risk Score
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary btn-lg ms-2" id="reset-form">
+                            <i class="fas fa-undo me-2"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="mt-5" style="display: none;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Overall Risk Score</h4>
+                            <div class="display-4 fw-bold" id="final-score">0%</div>
+                            <div class="mt-3">
+                                <span class="badge bg-success fs-6" id="risk-level">Low Risk</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Risk Breakdown</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="risk-chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Results -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Security Categories</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush" id="category-list">
+                                <!-- Categories will be populated here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Recommendations</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush" id="recommendations-list">
+                                <!-- Recommendations will be populated here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="mt-5">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-file-pdf me-2"></i>
+                        Generate Reports
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-bar fa-3x text-primary mb-3"></i>
+                                    <h5>Executive Summary</h5>
+                                    <p class="text-muted">High-level overview for management</p>
+                                    <button class="btn btn-primary" id="generate-executive">
+                                        <i class="fas fa-download me-2"></i>
+                                        Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-cogs fa-3x text-warning mb-3"></i>
+                                    <h5>Technical Report</h5>
+                                    <p class="text-muted">Detailed technical analysis</p>
+                                    <button class="btn btn-warning text-white" id="generate-technical">
+                                        <i class="fas fa-download me-2"></i>
+                                        Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                                    <h5>Compliance Report</h5>
+                                    <p class="text-muted">Regulatory compliance status</p>
+                                    <button class="btn btn-success" id="generate-compliance">
+                                        <i class="fas fa-download me-2"></i>
+                                        Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

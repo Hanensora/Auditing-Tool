@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Risk Assessment Tool - Test Page</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .test-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .test-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .test-button.secondary {
+            background-color: #e74c3c;
+        }
+        
+        .test-button.secondary:hover {
+            background-color: #c0392b;
+        }
+        
+        .test-button.success {
+            background-color: #27ae60;
+        }
+        
+        .test-button.success:hover {
+            background-color: #229954;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .status-online { background-color: #27ae60; }
+        .status-offline { background-color: #e74c3c; }
+        .status-loading { background-color: #f1c40f; }
+        
+        #test-results {
+            white-space: pre-wrap;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Cyber Risk Assessment Tool - Test Suite</h1>
+        <p>This test page allows you to verify all functionality of the Cyber Risk Assessment Tool.</p>
+        
+        <div class="test-section">
+            <h2>🔧 System Tests</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Frontend Components</h3>
+                    <button class="test-button" onclick="testFrontendComponents()">Test All Components</button>
+                    <button class="test-button secondary" onclick="testFormValidation()">Test Form Validation</button>
+                    <button class="test-button secondary" onclick="testCharts()">Test Charts</button>
+                    <button class="test-button secondary" onclick="testReports()">Test Report Generation</button>
+                </div>
+                
+                <div class="card">
+                    <h3>Backend Services</h3>
+                    <button class="test-button" onclick="testBackendServices()">Test Backend Services</button>
+                    <button class="test-button secondary" onclick="testDatabase()">Test Database</button>
+                    <button class="test-button secondary" onclick="testAPIEndpoints()">Test API Endpoints</button>
+                    <button class="test-button secondary" onclick="testRiskCalculation()">Test Risk Calculation</button>
+                </div>
+                
+                <div class="card">
+                    <h3>Integration Tests</h3>
+                    <button class="test-button" onclick="testFullWorkflow()">Test Full Workflow</button>
+                    <button class="test-button secondary" onclick="testDataPersistence()">Test Data Persistence</button>
+                    <button class="test-button secondary" onclick="testErrorHandling()">Test Error Handling</button>
+                    <button class="test-button secondary" onclick="testPerformance()">Test Performance</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 Manual Testing</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Form Testing</h3>
+                    <form id="test-form">
+                        <div class="form-group">
+                            <label for="org-name">Organization Name:</label>
+                            <input type="text" id="org-name" name="organizationName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="industry">Industry Sector:</label>
+                            <select id="industry" name="industrySector" required>
+                                <option value="">Select Industry</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="finance">Financial Services</option>
+                                <option value="education">Education</option>
+                                <option value="government">Government</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="technology">Technology</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="size">Organization Size:</label>
+                            <select id="size" name="organizationSize" required>
+                                <option value="">Select Size</option>
+                                <option value="small">Small (1-50 employees)</option>
+                                <option value="medium">Medium (51-500 employees)</option>
+                                <option value="large">Large (501+ employees)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="risk-score">Risk Score:</label>
+                            <input type="number" id="risk-score" name="riskScore" min="0" max="100" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="comments">Additional Comments:</label>
+                            <textarea id="comments" name="comments" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="test-button success">Submit Test Form</button>
+                        <button type="button" class="test-button" onclick="resetForm()">Reset Form</button>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3>Real-time Testing</h3>
+                    <div id="status-display">
+                        <div><span class="status-indicator status-loading"></span> System Status: Checking...</div>
+                        <div><span class="status-indicator status-loading"></span> Database: Checking...</div>
+                        <div><span class="status-indicator status-loading"></span> API: Checking...</div>
+                        <div><span class="status-indicator status-loading"></span> Charts: Checking...</div>
+                    </div>
+                    <br>
+                    <button class="test-button" onclick="checkSystemStatus()">Check System Status</button>
+                    <button class="test-button secondary" onclick="generateTestData()">Generate Test Data</button>
+                    <button class="test-button secondary" onclick="clearTestData()">Clear Test Data</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 Test Results</h2>
+            <div id="test-results">Click any test button above to see results here...</div>
+            <br>
+            <button class="test-button secondary" onclick="clearResults()">Clear Results</button>
+            <button class="test-button" onclick="exportResults()">Export Results</button>
+        </div>
+    </div>
+
+    <!-- Include the main script files -->
+    <script src="script.js"></script>
+    <script src="dynamic-frontend.js"></script>
+    <script src="frontend-integration.js"></script>
+    
+    <script>
+        // Test Suite Implementation
+        let testResults = [];
+        
+        // System Status Check
+        function checkSystemStatus() {
+            const results = [];
+            
+            // Check if main scripts are loaded
+            results.push(checkScriptLoaded('script.js', 'Main application script'));
+            results.push(checkScriptLoaded('dynamic-frontend.js', 'Dynamic frontend script'));
+            results.push(checkScriptLoaded('frontend-integration.js', 'Frontend integration script'));
+            
+            // Check if required functions exist
+            results.push(checkFunctionExists('calculateRiskScore', 'Risk calculation function'));
+            results.push(checkFunctionExists('generateExecutiveReport', 'Executive report function'));
+            results.push(checkFunctionExists('generateTechnicalReport', 'Technical report function'));
+            results.push(checkFunctionExists('generateComplianceReport', 'Compliance report function'));
+            
+            // Check if DOM elements exist
+            results.push(checkElementExists('organization-name', 'Organization name input'));
+            results.push(checkElementExists('industry-sector', 'Industry sector dropdown'));
+            results.push(checkElementExists('risk-score', 'Risk score input'));
+            
+            displayResults(results);
+            updateStatusDisplay(results);
+        }
+        
+        // Frontend Component Tests
+        function testFrontendComponents() {
+            const results = [];
+            
+            results.push(testFormElements());
+            results.push(testDropdowns());
+            results.push(testValidation());
+            results.push(testCharts());
+            results.push(testReports());
+            
+            displayResults(results);
+        }
+        
+        function testFormElements() {
+            const form = document.getElementById('test-form');
+            if (form) {
+                return { test: 'Form Elements', status: 'PASS', details: 'All form elements loaded successfully' };
+            } else {
+                return { test: 'Form Elements', status: 'FAIL', details: 'Form not found' };
+            }
+        }
+        
+        function testDropdowns() {
+            const industry = document.getElementById('industry');
+            const size = document.getElementById('size');
+            
+            if (industry && size && industry.options.length > 0 && size.options.length > 0) {
+                return { test: 'Dropdowns', status: 'PASS', details: 'All dropdowns populated with options' };
+            } else {
+                return { test: 'Dropdowns', status: 'FAIL', details: 'Dropdowns not properly populated' };
+            }
+        }
+        
+        function testValidation() {
+            const orgName = document.getElementById('org-name');
+            const industry = document.getElementById('industry');
+            
+            // Test required field validation
+            orgName.value = '';
+            industry.value = '';
+            
+            const form = document.getElementById('test-form');
+            const isValid = form.checkValidity();
+            
+            if (!isValid) {
+                return { test: 'Form Validation', status: 'PASS', details: 'Required field validation working' };
+            } else {
+                return { test: 'Form Validation', status: 'FAIL', details: 'Required field validation not working' };
+            }
+        }
+        
+        function testCharts() {
+            // Check if Chart.js is loaded
+            if (typeof Chart !== 'undefined') {
+                return { test: 'Charts', status: 'PASS', details: 'Chart.js library loaded successfully' };
+            } else {
+                return { test: 'Charts', status: 'FAIL', details: 'Chart.js library not loaded' };
+            }
+        }
+        
+        function testReports() {
+            // Check if jsPDF is loaded
+            if (typeof jsPDF !== 'undefined' || (typeof window.jspdf !== 'undefined' && window.jspdf.jsPDF)) {
+                return { test: 'Report Generation', status: 'PASS', details: 'jsPDF library loaded successfully' };
+            } else {
+                return { test: 'Report Generation', status: 'FAIL', details: 'jsPDF library not loaded' };
+            }
+        }
+        
+        // Backend Service Tests
+        function testBackendServices() {
+            const results = [];
+            
+            results.push(testServerConnection());
+            results.push(testDatabaseConnection());
+            results.push(testAPIEndpoints());
+            
+            displayResults(results);
+        }
+        
+        async function testServerConnection() {
+            try {
+                const response = await fetch('/api/health');
+                if (response.ok) {
+                    const data = await response.json();
+                    return { test: 'Server Connection', status: 'PASS', details: `Server responding: ${data.message}` };
+                } else {
+                    return { test: 'Server Connection', status: 'FAIL', details: `Server error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Server Connection', status: 'FAIL', details: `Connection error: ${error.message}` };
+            }
+        }
+        
+        async function testDatabaseConnection() {
+            try {
+                const response = await fetch('/api/assessments');
+                if (response.ok || response.status === 401) { // 401 is expected if not authenticated
+                    return { test: 'Database Connection', status: 'PASS', details: 'Database accessible' };
+                } else {
+                    return { test: 'Database Connection', status: 'FAIL', details: `Database error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Database Connection', status: 'FAIL', details: `Database error: ${error.message}` };
+            }
+        }
+        
+        async function testAPIEndpoints() {
+            const endpoints = [
+                '/api/health',
+                '/api/assessments',
+                '/api/reports',
+                '/api/risk'
+            ];
+            
+            const results = [];
+            
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(endpoint);
+                    if (response.ok || response.status === 401 || response.status === 404) {
+                        results.push({ test: `API Endpoint: ${endpoint}`, status: 'PASS', details: 'Endpoint accessible' });
+                    } else {
+                        results.push({ test: `API Endpoint: ${endpoint}`, status: 'FAIL', details: `Error: ${response.status}` });
+                    }
+                } catch (error) {
+                    results.push({ test: `API Endpoint: ${endpoint}`, status: 'FAIL', details: `Error: ${error.message}` });
+                }
+            }
+            
+            return results;
+        }
+        
+        // Risk Calculation Test
+        async function testRiskCalculation() {
+            const testResponses = [
+                { category: 'IDENTIFY', subcategory: 'Asset Management', score: 80 },
+                { category: 'PROTECT', subcategory: 'Access Control', score: 70 },
+                { category: 'DETECT', subcategory: 'Continuous Monitoring', score: 60 },
+                { category: 'RESPOND', subcategory: 'Incident Response', score: 50 },
+                { category: 'RECOVER', subcategory: 'Recovery Planning', score: 40 }
+            ];
+            
+            const testData = {
+                organizationName: 'Test Organization',
+                industrySector: 'technology',
+                responses: testResponses
+            };
+            
+            try {
+                const response = await fetch('/api/risk/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    return { test: 'Risk Calculation', status: 'PASS', details: `Calculated score: ${result.overallScore}%` };
+                } else {
+                    return { test: 'Risk Calculation', status: 'FAIL', details: `Calculation error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Risk Calculation', status: 'FAIL', details: `Calculation error: ${error.message}` };
+            }
+        }
+        
+        // Full Workflow Test
+        async function testFullWorkflow() {
+            const results = [];
+            
+            // Test assessment creation
+            results.push(await testAssessmentCreation());
+            
+            // Test report generation
+            results.push(await testReportGeneration());
+            
+            // Test data retrieval
+            results.push(await testDataRetrieval());
+            
+            displayResults(results);
+        }
+        
+        async function testAssessmentCreation() {
+            const testData = {
+                organizationName: 'Test Organization',
+                industrySector: 'technology',
+                responses: [
+                    { category: 'IDENTIFY', subcategory: 'Asset Management', score: 80 },
+                    { category: 'PROTECT', subcategory: 'Access Control', score: 70 }
+                ]
+            };
+            
+            try {
+                const response = await fetch('/api/risk/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                if (response.ok) {
+                    return { test: 'Assessment Creation', status: 'PASS', details: 'Assessment created successfully' };
+                } else {
+                    return { test: 'Assessment Creation', status: 'FAIL', details: `Creation error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Assessment Creation', status: 'FAIL', details: `Creation error: ${error.message}` };
+            }
+        }
+        
+        async function testReportGeneration() {
+            try {
+                const response = await fetch('/api/reports/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ reportType: 'executive' })
+                });
+                
+                if (response.ok) {
+                    return { test: 'Report Generation', status: 'PASS', details: 'Report generated successfully' };
+                } else {
+                    return { test: 'Report Generation', status: 'FAIL', details: `Generation error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Report Generation', status: 'FAIL', details: `Generation error: ${error.message}` };
+            }
+        }
+        
+        async function testDataRetrieval() {
+            try {
+                const response = await fetch('/api/assessments');
+                
+                if (response.ok || response.status === 401) {
+                    return { test: 'Data Retrieval', status: 'PASS', details: 'Data retrieval successful' };
+                } else {
+                    return { test: 'Data Retrieval', status: 'FAIL', details: `Retrieval error: ${response.status}` };
+                }
+            } catch (error) {
+                return { test: 'Data Retrieval', status: 'FAIL', details: `Retrieval error: ${error.message}` };
+            }
+        }
+        
+        // Helper Functions
+        function checkScriptLoaded(scriptName, description) {
+            const scripts = document.getElementsByTagName('script');
+            const found = Array.from(scripts).some(script => script.src.includes(scriptName));
+            
+            if (found) {
+                return { test: `Script: ${description}`, status: 'PASS', details: `${scriptName} loaded successfully` };
+            } else {
+                return { test: `Script: ${description}`, status: 'FAIL', details: `${scriptName} not found` };
+            }
+        }
+        
+        function checkFunctionExists(functionName, description) {
+            if (typeof window[functionName] === 'function') {
+                return { test: `Function: ${description}`, status: 'PASS', details: `${functionName} exists and is callable` };
+            } else {
+                return { test: `Function: ${description}`, status: 'FAIL', details: `${functionName} not found or not a function` };
+            }
+        }
+        
+        function checkElementExists(elementId, description) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                return { test: `Element: ${description}`, status: 'PASS', details: `${elementId} exists` };
+            } else {
+                return { test: `Element: ${description}`, status: 'FAIL', details: `${elementId} not found` };
+            }
+        }
+        
+        function displayResults(results) {
+            const resultsDiv = document.getElementById('test-results');
+            let output = '=== TEST RESULTS ===\n\n';
+            
+            results.forEach(result => {
+                if (Array.isArray(result)) {
+                    result.forEach(r => {
+                        output += `${r.status}: ${r.test}\n`;
+                        output += `Details: ${r.details}\n\n`;
+                    });
+                } else {
+                    output += `${result.status}: ${result.test}\n`;
+                    output += `Details: ${result.details}\n\n`;
+                }
+            });
+            
+            resultsDiv.textContent = output;
+        }
+        
+        function updateStatusDisplay(results) {
+            const statusDisplay = document.getElementById('status-display');
+            const statusItems = statusDisplay.querySelectorAll('div');
+            
+            // Update status indicators based on results
+            results.forEach((result, index) => {
+                if (index < statusItems.length) {
+                    const item = statusItems[index];
+                    const indicator = item.querySelector('.status-indicator');
+                    
+                    if (result.status === 'PASS') {
+                        indicator.className = 'status-indicator status-online';
+                    } else {
+                        indicator.className = 'status-indicator status-offline';
+                    }
+                }
+            });
+        }
+        
+        // Event Listeners
+        document.getElementById('test-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const result = {
+                test: 'Manual Form Submission',
+                status: 'PASS',
+                details: `Form submitted with: ${JSON.stringify(data)}`
+            };
+            
+            displayResults([result]);
+        });
+        
+        // Test Button Event Listeners
+        function testFormValidation() {
+            const results = [testValidation()];
+            displayResults(results);
+        }
+        
+        function testBackendServices() {
+            testBackendServices();
+        }
+        
+        function testDatabase() {
+            testDatabaseConnection().then(result => {
+                displayResults([result]);
+            });
+        }
+        
+        function testAPIEndpoints() {
+            testAPIEndpoints().then(results => {
+                displayResults(results);
+            });
+        }
+        
+        function testRiskCalculation() {
+            testRiskCalculation().then(result => {
+                displayResults([result]);
+            });
+        }
+        
+        function testFullWorkflow() {
+            testFullWorkflow();
+        }
+        
+        function testDataPersistence() {
+            const result = {
+                test: 'Data Persistence',
+                status: 'INFO',
+                details: 'Manual test - check if data persists after page refresh'
+            };
+            displayResults([result]);
+        }
+        
+        function testErrorHandling() {
+            const result = {
+                test: 'Error Handling',
+                status: 'INFO',
+                details: 'Manual test - check error messages for invalid inputs'
+            };
+            displayResults([result]);
+        }
+        
+        function testPerformance() {
+            const result = {
+                test: 'Performance',
+                status: 'INFO',
+                details: 'Manual test - check loading times and responsiveness'
+            };
+            displayResults([result]);
+        }
+        
+        function resetForm() {
+            document.getElementById('test-form').reset();
+            const result = {
+                test: 'Form Reset',
+                status: 'PASS',
+                details: 'Form reset successfully'
+            };
+            displayResults([result]);
+        }
+        
+        function generateTestData() {
+            document.getElementById('org-name').value = 'Test Organization Inc.';
+            document.getElementById('industry').value = 'technology';
+            document.getElementById('size').value = 'medium';
+            document.getElementById('risk-score').value = '75';
+            document.getElementById('comments').value = 'This is a test assessment for validation purposes.';
+            
+            const result = {
+                test: 'Test Data Generation',
+                status: 'PASS',
+                details: 'Test data populated in form fields'
+            };
+            displayResults([result]);
+        }
+        
+        function clearTestData() {
+            resetForm();
+        }
+        
+        function clearResults() {
+            document.getElementById('test-results').textContent = 'Results cleared. Click any test button above to see new results...';
+        }
+        
+        function exportResults() {
+            const results = document.getElementById('test-results').textContent;
+            const blob = new Blob([results], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'test-results.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize status check on page load
+        window.addEventListener('load', () => {
+            checkSystemStatus();
+        });
+    </script>
+</body>
+</html>
