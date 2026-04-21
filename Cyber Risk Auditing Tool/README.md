@@ -60,15 +60,6 @@ cd Cyber-Risk-Auditing-Tool
 live-server
 ```
 
-#### XAMPP/WAMP (Windows)
-1. Copy project folder to `htdocs` directory
-2. Start Apache server
-3. Visit: http://localhost/your-project-folder
-
-## Hosting Options
-
-### Free Hosting Platforms
-
 #### GitHub Pages
 1. Create a GitHub repository
 2. Upload all project files
@@ -76,28 +67,7 @@ live-server
 4. Select source: `main` branch, `/root` folder
 5. Your site will be available at: `https://username.github.io/repository-name`
 
-#### Netlify
-1. Go to [netlify.com](https://netlify.com)
-2. Drag and drop your project folder
-3. Your site will be deployed with a custom URL
 
-#### Vercel
-1. Install Vercel CLI: `npm install -g vercel`
-2. Run `vercel` in your project directory
-3. Follow the deployment prompts
-
-### Cloud Hosting
-
-#### AWS S3 Static Website
-1. Create S3 bucket
-2. Upload all files
-3. Enable static website hosting
-4. Configure bucket policy for public access
-
-#### Google Cloud Storage
-1. Create a storage bucket
-2. Upload files with public read access
-3. Enable static website hosting
 
 ## Project Structure
 
@@ -179,14 +149,6 @@ const SCORING = {
 - **Charts**: Update Chart.js configuration in `script.js`
 - **Layout**: Adjust CSS Grid and Flexbox properties
 
-## Browser Compatibility
-
-- **Chrome**: Version 60+
-- **Firefox**: Version 55+
-- **Safari**: Version 12+
-- **Edge**: Version 79+
-- **Mobile**: iOS Safari, Android Chrome
-
 ## Security Considerations
 
 ⚠️ **Important Notes:**
@@ -254,6 +216,3 @@ Potential improvements for future versions:
 - Advanced reporting and analytics
 - API integration with security tools
 
----
-
-**Disclaimer**: This tool provides general cybersecurity guidance and should not replace professional security assessments. Always consult with qualified security professionals for organization-specific advice.
